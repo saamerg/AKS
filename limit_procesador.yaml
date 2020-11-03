@@ -1,5 +1,14 @@
-resources:
-  requests:
-     cpu: 250m
-  limits:
-     cpu: 500m
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pocrandd-deploy
+spec:
+  containers:
+      - name: pocrandd
+        image: qaacrpocrandd.azurecr.io/pocrandd:v1
+        resources:
+          limits:
+            requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
