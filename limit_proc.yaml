@@ -1,11 +1,22 @@
-apiVersion: v1
-kind: LimitRange
+kind: Deployment
 metadata:
-  name: cpu-min-max-demo-lr
+  name: pocrandd-deploy
 spec:
-  limits:
-  - max:
-      cpu: "800m"
-    min:
-      cpu: "200m"
-    type: Container
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pocrandd-pod
+  template:
+    metadata:
+      labels:
+        app: pocrandd-pod
+    spec:
+      containers:
+      - name: pocrandd
+        image: qaacrpocrandd.azurecr.io/pocrandd:v1
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
