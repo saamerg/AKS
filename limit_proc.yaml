@@ -1,10 +1,11 @@
-containers:
-- name: pocrandd-deploy-b47994dbd-9v54s
-    image: ubuntu
-    resources:
-        requests:
-            memory: “64Mi”
-            cpu: “300m”
-        limits:
-            memory: “128Mi”
-            cpu: “500m”
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cpu-min-max-demo-lr
+spec:
+  limits:
+  - max:
+      cpu: "500m"
+    min:
+      cpu: "250m"
+    type: Container
